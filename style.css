@@ -1,0 +1,6 @@
+.forecast-day {
+    display: inline-block;
+    padding: 10px;
+    text-align: center;
+    width: 20%;
+}
