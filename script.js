@@ -14,25 +14,75 @@ const visibleHistoryEl = document.querySelector('#history')
 // need to grab city input citySelection.value
     // then make a function to save to local storage and post it somewhere
 
-function saveInfo(event) {
-    let history = citySelection.value
-    let historyDivEl = document.createElement('div')
-    historyDivEl.classList.add('list-group')
 
-    let historyCardEl = document.createElement('button')
-    historyCardEl.setAttribute('type', 'button')
-    historyCardEl.classList.add('list-group-item')
-    historyCardEl.style.width='20rem'
+    // function saveInfo(event) {
+    //     let history = citySelection.value
+    //     let historyDivEl = document.createElement('div')
+    //     historyDivEl.classList.add('list-group')
+    
+    //     let historyCardEl = document.createElement('button')
+    //     historyCardEl.setAttribute('type', 'button')
+    //     historyCardEl.classList.add('list-group-item', 'list-group-active')
+    //     historyCardEl.style.width='20rem'
+    //     historyCardEl.textContent = history
 
-    console.log(history)
-    localStorage.setItem('search history', history)
-    historyDivEl.append(historyCardEl)
-    visibleHistoryEl.innerHTML = '';
-    visibleHistoryEl.append(history)
-}
+    //     let historyArr = []
+    //     function addHistory() {
+    //         historyArr.push(history)
+            
+    //         console.log(localStorage)
+    //     }
+    
+    //     console.log(history)
+    //     //localStorage.setItem('search history', history)
+    //     historyDivEl.append(historyCardEl)
+    //     visibleHistoryEl.innerHTML = '';
+    //     visibleHistoryEl.append(historyDivEl)
+    // }
+
+    // function saveInfo() {
+        
+       
+    //     let historyArr = [];
+    //     historyArr.push(citySelection.value);
+        
+    //     localStorage.setItem('search-history', JSON.stringify(historyArr));
+    // }
+
+    function saveInfo(citySelection) {
+        let myHistory = citySelection.value.toString();
+        let historyArr = JSON.parse(localStorage.getItem('search-history')) || [];
+        historyArr.push(myHistory);
+        localStorage.setItem('search-history', JSON.stringify(historyArr));
+      }
+    
+      
+
+
+    // function saveInfo(searchInput) {
+    //     // Get any existing data from local storage
+    //     let existingData = localStorage.getItem('searchHistory');
+      
+    //     // If there's existing data, parse it into a JavaScript array
+    //     if (existingData) {
+    //       existingData = JSON.parse(existingData);
+    //     } else {
+    //       // If there's no existing data, create an empty array
+    //       existingData = [];
+    //     }
+      
+    //     // Add the new input to the array
+    //     existingData.push(searchInput);
+      
+    //     // Store the updated array back in local storage
+    //     localStorage.setItem('searchHistory', JSON.stringify(existingData));
+    //   }
+
+    
 
 
 searchBtn.addEventListener ("click", function(event){
+    saveInfo(citySelection)
     fetch('https://api.openweathermap.org/data/2.5/weather?q='+citySelection.value+'&appid=c1a19879607eb06816098f47fc86a589&units=imperial')
     .then(res=>res.json())
     .then(data=>{
