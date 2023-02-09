@@ -1,39 +1,68 @@
-// const apiKey = "c1a19879607eb06816098f47fc86a589" 
+const apiKey = "c1a19879607eb06816098f47fc86a589" 
 
-// const searchBtn = document.querySelector(".btn");
-// const citySelection = document.querySelector('#city');
-// const currentCity = document.querySelector('.card-title');
-// const currentTemp = document.querySelector('.temp');
-// const currentWind = document.querySelector('.wind');
-// const currentHumid = document.querySelector('.humid');
+const searchBtn = document.querySelector(".btn");
+const citySelection = document.querySelector('#city');
+const currentCity = document.querySelector('.card-title');
+const currentTemp = document.querySelector('.temp');
+const currentWind = document.querySelector('.wind');
+const currentHumid = document.querySelector('.humid');
+const currentWeather = document.querySelector('#currentWeather')
+const fiveDayEl = document.querySelector('#fiveDay')
 
 
-
-// searchBtn.addEventListener ("click", function(){
-//     fetch('https://api.openweathermap.org/data/2.5/weather?q='+citySelection.value+'&appid=c1a19879607eb06816098f47fc86a589&units=imperial')
-//     .then(res=>res.json())
-//     .then(data=>{
-//         console.log(data);
-//         currentCity.textContent=data.name
-//         currentTemp.textContent=`Temp: ${data.main.temp.toFixed(0)}°F`
-//         currentWind.textContent=`Wind: ${data.wind.speed} mph`
-//         currentHumid.textContent=`Humidity: ${data.main.humidity}%`
-//         currentCity.textContent=`Currently in: ${data.name}`
-//         event.preventDefault()
+searchBtn.addEventListener ("click", function(event){
+    fetch('https://api.openweathermap.org/data/2.5/weather?q='+citySelection.value+'&appid=c1a19879607eb06816098f47fc86a589&units=imperial')
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data);
+        currentCity.textContent=data.name
+        currentTemp.textContent=`Temp: ${data.main.temp.toFixed(0)}°F`
+        currentWind.textContent=`Wind: ${data.wind.speed} mph`
+        currentHumid.textContent=`Humidity: ${data.main.humidity}%`
+        currentWeather.textContent=`${data.name}`
+        // currentWeather.appendChild(currentWeather)
+        event.preventDefault()
+        
         
 
 
 
 
 
-//         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}&units=imperial`)
-//         .then(res=>res.json())
-//         .then(data=>{
-//         console.log(data);
-//         currentCity.textContent=data.name
-//         console.log(data)
-//     })
-// }) 
-// })
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}&units=imperial`)
+        .then(res=>res.json())
+        .then(data=>{        
+        currentCity.textContent=data.name
+        console.log(data)
+        for (let i = 0; i < data.list.length; i+=8) {
+            const day = data.list[i];
+            let divEl = document.createElement('div')
+            divEl.classList.add('col')
+            let cardDivEl = document.createElement('div')
+            cardDivEl.classList.add('card')
+            cardDivEl.style.width='13rem'
+            let heading4El = document.createElement('h4')
+            heading4El.classList.add('card-title', 'p-2') 
+            heading4El.textContent = dayjs.unix(day.dt).format('MM-DD-YY')
+            cardDivEl.append(heading4El)
+            let imagesEl = document.createElement('img')
+            imagesEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + day.weather[0].icon + '@4x.png' )
+            imagesEl.classList.add('card-img-top')
+            imagesEl.setAttribute('alt','Weather properties')
+            cardDivEl.append(imagesEl)
+            let divBodyEl = document.createElement('div')
+            divBodyEl.classList.add('card-body')
+            let tempEl = document.createElement('p')
+            tempEl.classList.add('card-text')
+            tempEl.textContent = `Temp: ${data.main.temp.toFixed(0)}°F`
+
+
+            divEl.append(cardDivEl)
+            fiveDayEl.append(divEl)
+
+        }
+    })
+}) 
+})
 
 
