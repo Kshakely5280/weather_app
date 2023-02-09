@@ -14,8 +14,8 @@
     <title>Weather Dashboard</title>
   </head>
 
-  <body>
-    <header>
+  <body class="bodyWork">
+    <header class="head">
       <h1>Weather Dashboard</h1>
     </header>
     <div class="container">
@@ -30,6 +30,7 @@
             aria-describedby="button-addon2"
           />
           <button
+            onclick="saveInfo(event)"
             class="btn btn-outline-secondary"
             type="button"
             id="button-addon2"
@@ -37,10 +38,11 @@
             Search for a City!
           </button>
         </div>
+        <div id="history" class="col"></div>
         <div class="container">
           <div class="row">
             <div class="col">
-              <div class="card" style="width: 78rem; margin-bottom: 10px">
+              <div class="card" style="width: 81rem; margin-bottom: 10px">
                 <div class="card-body">
                   <h5 id="currentWeather">Currently in:</h5>
                   <p class="card-text temp"></p>

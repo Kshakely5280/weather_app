@@ -8,6 +8,26 @@ const currentWind = document.querySelector('.wind');
 const currentHumid = document.querySelector('.humid');
 const currentWeather = document.querySelector('#currentWeather')
 const fiveDayEl = document.querySelector('#fiveDay')
+const visibleHistoryEl = document.querySelector('#history')
+
+// history
+// need to grab city input citySelection.value
+    // then make a function to save to local storage and post it somewhere
+
+function saveInfo(event) {
+    let history = citySelection.value
+    let historyDivEl = document.createElement('div')
+    historyDivEl.classList.add('col')
+
+    let historyCardEl = document.createElement('div')
+    historyCardEl.classList.add('card')
+    historyCardEl.style.width='20rem'
+
+    console.log(history)
+    localStorage.setItem('search history', history)
+    historyDivEl.append(historyCardEl)
+    visibleHistoryEl.append(historyDivEl)
+}
 
 
 searchBtn.addEventListener ("click", function(event){
