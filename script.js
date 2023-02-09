@@ -17,16 +17,18 @@ const visibleHistoryEl = document.querySelector('#history')
 function saveInfo(event) {
     let history = citySelection.value
     let historyDivEl = document.createElement('div')
-    historyDivEl.classList.add('col')
+    historyDivEl.classList.add('list-group')
 
-    let historyCardEl = document.createElement('div')
-    historyCardEl.classList.add('card')
+    let historyCardEl = document.createElement('button')
+    historyCardEl.setAttribute('type', 'button')
+    historyCardEl.classList.add('list-group-item')
     historyCardEl.style.width='20rem'
 
     console.log(history)
     localStorage.setItem('search history', history)
     historyDivEl.append(historyCardEl)
-    visibleHistoryEl.append(historyDivEl)
+    visibleHistoryEl.innerHTML = '';
+    visibleHistoryEl.append(history)
 }
 
 
