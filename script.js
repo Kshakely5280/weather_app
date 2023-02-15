@@ -16,13 +16,12 @@ function saveInfo(citySelection) {
   let historyArr = JSON.parse(localStorage.getItem("search-history")) || [];
   historyArr.push(myHistory);
   localStorage.setItem("search-history", JSON.stringify(historyArr));
-  console.log(historyArr);
-
+ 
   visibleHistoryEl.innerHTML = "";
   const newIndex = Math.max(historyArr.length - 5, 0);
   for (let i = newIndex; i < historyArr.length; i++) {
     let historyList = document.createElement("div");
-    historyList.classList.add('btn')
+    historyList.classList.add("btn");
     historyList.textContent = historyArr[i];
     historyList.addEventListener("click", function () {
       getCity(historyArr[i]);
@@ -32,11 +31,9 @@ function saveInfo(citySelection) {
 }
 
 function getCity(cityName) {
-    citySelection.value = cityName;
-    searchBtn.click();
-  }
-
-
+  citySelection.value = cityName;
+  searchBtn.click();
+}
 
 searchBtn.addEventListener("click", function (event) {
   saveInfo(citySelection);
@@ -47,17 +44,16 @@ searchBtn.addEventListener("click", function (event) {
   )
     .then((res) => res.json())
     .then((data) => {
-        if (data.cod === "404") {
-            modalText.textContent =
-              "City not found. Please enter a valid city name.";
-            modal.style.display = "block";
-            return;
-          }
+      if (data.cod === "404") {
+        modalText.textContent =
+          "City not found. Please enter a valid city name.";
+        modal.style.display = "block";
+        return;
+      }
       currentTemp.textContent = `Temp: ${data.main.temp.toFixed(0)}°F`;
       currentWind.textContent = `Wind: ${data.wind.speed} mph`;
       currentHumid.textContent = `Humidity: ${data.main.humidity}%`;
       currentWeather.textContent = `${data.name}`;
-
 
       event.preventDefault();
 
@@ -79,7 +75,9 @@ searchBtn.addEventListener("click", function (event) {
 
             let heading4El = document.createElement("h4");
             heading4El.classList.add("card-title", "p-2");
-            heading4El.textContent = dayjs.unix(day.dt).format("dddd, MMMM D, YYYY");
+            heading4El.textContent = dayjs
+              .unix(day.dt)
+              .format("dddd, MMMM D, YYYY");
             cardDivEl.append(heading4El);
 
             let imagesEl = document.createElement("img");
@@ -116,8 +114,8 @@ searchBtn.addEventListener("click", function (event) {
             fiveDayEl.append(divEl);
 
             modalClose.addEventListener("click", function () {
-                modal.style.display = "none";
-              });
+              modal.style.display = "none";
+            });
           }
         });
     });
