@@ -31,6 +31,13 @@ function saveInfo(citySelection) {
   }
 }
 
+function getCity(cityName) {
+    citySelection.value = cityName;
+    searchBtn.click();
+  }
+
+
+
 searchBtn.addEventListener("click", function (event) {
   saveInfo(citySelection);
   fetch(
