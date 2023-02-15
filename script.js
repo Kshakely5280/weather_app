@@ -18,7 +18,8 @@ const visibleHistoryEl = document.querySelector('#history')
         console.log(historyArr)
 
         visibleHistoryEl.innerHTML = '';
-        for (let i = 0; i < historyArr.length; i++) {
+        const newIndex = Math.max(historyArr.length - 5, 0)
+        for (let i = newIndex; i < historyArr.length; i++) {
             let historyList = document.createElement('div')
             historyList.textContent = historyArr[i]
             historyList.addEventListener('click', function() {
@@ -53,7 +54,7 @@ searchBtn.addEventListener ("click", function(event){
         fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${data.coord.lat}&lon=${data.coord.lon}&appid=${apiKey}&units=imperial`)
         .then(res=>res.json())
         .then(data=>{        
-        console.log(data)
+        fiveDayEl.innerHTML = ''
         for (let i = 0; i < data.list.length; i+=8) {
             const day = data.list[i];
 
