@@ -1,6 +1,12 @@
 .head {
     text-align: center;
-    background-image: linear-gradient(to right, red, yellow);
+  }
+
+body {
+    background: url(https://images.unsplash.com/photo-1579003593419-98f949b9398f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1746&q=80) center fixed;
+    background-size: cover;
+    color:white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .btn {
@@ -27,7 +33,7 @@
   
   .modal-content {
 
-    background-color: #fefefe;
+    background-color: red;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -45,7 +51,7 @@
   
   #modal-close {
 
-    background-color: peru;
+    background-color: #007bff;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -56,5 +62,9 @@
 
 #modal-close:hover {
     background-color: #3e8e41; 
+}
+
+.card {
+    background: transparent;
 }
 
